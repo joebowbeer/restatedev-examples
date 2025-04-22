@@ -43,7 +43,7 @@ This example shows:
 - **Exactly-once processing**: Ensure that duplicate requests are not processed multiple times via idempotency keys
 - **Concurrency**: Restate executes requests to the same Virtual Object key sequentially, to ensure consistency of its K/V state
 
-The example shows how you can programmatically submit a requests to a Restate service.
+The example shows how you can programmatically submit requests to a Restate service.
 Every request gets processed durably, and deduplicated based on the idempotency key.
 
 - The [client](src/durablerpc/express_app.ts) receives product reservation requests and forwards them to the product service.
@@ -82,7 +82,7 @@ Restate deduplicated the request (with the reservation ID as idempotency key) an
 
 Use Restate as a queue. Schedule tasks for now or later and ensure the task is only executed once.
 
-- [Task Submitter](src/queue/task_submitter.ts): schedules tasks via send requests with and idempotency key.
+- [Task Submitter](src/queue/task_submitter.ts): schedules tasks via send requests with an idempotency key.
     - The **send requests** put the tasks in Restate's queue. The task submitter does not wait for the task response.
     - The **idempotency key** in the header is used by Restate to deduplicate requests.
     - If a delay is set, the task will be executed later and Restate will track the timer durably, like a **delayed task queue**.
@@ -109,9 +109,9 @@ them with inline comments.
 <details>
 <summary><strong>Running the Example</strong></summary>
 
-_This is purely opional, the example code and comments document the behavior well._
+_This is purely optional, the example code and comments document the behavior well._
 _Running the example can be interesting, though, if you want to play with specific failure_
-_scenarios, like pausing/killing processes at specific points and observe the behavior._
+_scenarios, like pausing/killing processes at specific points and observing the behavior._
 
 1. **Sample Postgres Instance**
 
@@ -561,7 +561,7 @@ Escalating to evt_1JH2Y4F2eZvKYlo2C8b9 invoice to support team
 ## Parallelizing work
 [<img src="https://raw.githubusercontent.com/restatedev/img/refs/heads/main/show-code.svg">](src/parallelizework/fan_out_worker.ts)
 
-This example shows how to use the Restate SDK to **execute a list of tasks in parallel and then gather their result**.
+This example shows how to use the Restate SDK to **execute a list of tasks in parallel and then gather their results**.
 Also known as fan-out, fan-in.
 
 The example implements a [worker service](src/parallelizework/fan_out_worker.ts), that takes a task as input.
